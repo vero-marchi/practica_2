@@ -1,3 +1,8 @@
+## Importaciones para utilizar en las funciones
+import random
+import string
+from datetime import datetime
+
 # FUNCION PARA VALIDAR USUARIO
 
 def validate_user(username):
@@ -62,3 +67,36 @@ def count_keywords(descriptions, keywords):
 
     # Retorno
     return count
+
+
+
+# FUNCIÓN GENERADOR RANDOM DE CODIGO DE DESCUENTO
+
+
+def code_generator(username):
+    # Verifico que el nombre de usuario no exceda los 15 caracteres
+    if len(username) > 15:
+        # Si excede los 15 caracteres imprimo mensaje de, sino avanzo al else
+        print ('El nombre de usuario no puede exceder los 15 caracteres')
+        return None
+    else:
+        # Genero la fecha actual
+        date = datetime.today().strftime("%Y%m%d")
+        
+        # Definir los caracteres posibles
+        valid_chars = string.ascii_uppercase + string.digits
+        
+        random_chars = ""
+
+        # Generar la cadena de 20 caracteres aleatorios
+        for i in range(20):
+            random_chars += random.choice(valid_chars)
+
+        # Concatenar el nombre del usuario, la fecha y los caracteres aleatorios
+        discount_code = username.upper() + date + random_chars
+
+        # Asegurarse de que el código tenga una longitud de 30 caracteres
+        discount_code = discount_code[:30]
+
+        return discount_code
+        
