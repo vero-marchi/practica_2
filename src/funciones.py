@@ -1,4 +1,3 @@
-
 # FUNCION PARA VALIDAR USUARIO
 
 def validate_user(username):
@@ -16,18 +15,16 @@ def validate_user(username):
         if char.isdigit():
             has_number = True
         # Verifico si es una letra mayúscula
-        if char.isupper():
+        elif char.isupper():
             has_uppercase = True
         # Verifico si el caracter no es ni una letra ni un número
-        # char.isalnum() devuelve True si el carácter es una letra (A-Z, a-z) o un número (0-9).
-        # Si hubiere caracteres especiales, espacio, símbolos, etc, devuelve false
-        if not char.isalnum():
+        # char.isalpha() devuelve True si el carácter es una letra (A-Z, a-z)
+        # Si no es una letra ni un número devuelve false
+        elif not (char.isalpha() or char.isdigit()):
             return False
 
-    # Verifica si se cumplen todas las condiciones
-    if has_number and has_uppercase:
-        return True
-    return False
+    # Retorno True o False verificando si se cumplen las condiciones
+    return has_number and has_uppercase
 
 
 # FUNCIÓN PARA CLASIFICAR VELOCIDAD
@@ -44,3 +41,24 @@ def classify_reaction_time(reaction_time):
     # Si el tiempo es mayor a 500 clasifica en lento
     else:
         return "Lento"
+    
+
+
+# FUNCIÓN PARA CONTAR PALABRAS CLAVE
+
+def count_keywords(descriptions, keywords):
+
+    # Inicializo un diccionario clave-valor para llevar el conteo de menciones
+    count = {keyword: 0 for keyword in keywords}
+        
+    # Recorro cada elemento de la lista
+    for description in descriptions:
+        # Separo las palabras
+        words = description.lower().split()
+        # Recorro la lista  de palabras clave a buscar
+        for keyword in keywords:
+            # Cuento las menciones exactas
+            count[keyword] += words.count(keyword)
+
+    # Retorno
+    return count
