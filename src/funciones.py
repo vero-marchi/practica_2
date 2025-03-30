@@ -21,7 +21,7 @@ def validate_user(username):
     Args: 
     Nombre de usuario a validar (str).
     
-    Return: 
+    Returns: 
     bool: True si se cumplen todos los criterios. False si no se cumple alguno de ellos
 
     """
@@ -68,7 +68,7 @@ def classify_reaction_time(reaction_time):
     Args: 
     Tiempo de reacción(int).
     
-    Return: 
+    Returns: 
     str: categoría correspondiente al tiempo de reacción.
 
     """    
@@ -100,7 +100,7 @@ def count_keywords(descriptions, keywords):
     descriptions(list of str): lista de descripciones en las que se buscarán las palabras clave.
     Keyword(str): palabra clave qie se buscará en las descripciones.
     
-    Return: 
+    Returns: 
     int: cantidad de veces que la palabra clave se encuentra en la lista de descripciones.
 
     """   
@@ -139,7 +139,7 @@ def code_generator(username):
     Args: 
     username(str): debe tener menos de 15 caracteres.
     
-    Return: 
+    Returns: 
     str: código de 30 caracteres conformado por nombre + fecha + caracteres aleatorios.
     None: si se ingresó un nombre de usuario mayor a 15 caracteres.
 
@@ -171,3 +171,4 @@ def code_generator(username):
 
         return discount_code
         
+
