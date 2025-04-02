@@ -60,8 +60,13 @@ def update_stats(round_data, stats):
                      'kills', 'assists', 'deaths', 'MVP', 'points' (todos int).
 
     Returns:
-        None: modifica el diccionario stats, acumulando las estadísticas de la ronda.
+        str: player mvp de a ronda o none si no hay mvp.
     """
+    
+    #Inicialización de variables mvp y max_points
+    mvp = None
+    max_points = None
+    
     # Itero por cada jugador de la ronda y calculo el puntaje basado en las acciones.
     for player in round_data:
         # Se contempla la posibilidad de que algún jugador no participe en la ronda
@@ -75,38 +80,27 @@ def update_stats(round_data, stats):
         stats[player]['kills'] += stats_current['kills']
         stats[player]['assists'] += stats_current['assists']
         stats[player]['deaths'] += stats_current['deaths']
-        stats[player]['points'] += calculate_points(stats_current)
-
-"""
-=============================================================
-FUNCIONES DE ANÁLISIS Y ORDENAMIENTO
-=============================================================
-"""
-
-def find_mvp(round_data):
-    """
-    Busca el jugador con mayor puntaje de la ronda.
-    
-    Args:
-        round_data(dict): diccionario donde cada clave es el nombre de un jugador (str), 
-                          y cada valor es otro diccionario con sus estadísticas ('kills', 
-                          'assists', 'deaths').
-    
-    Returns:
-        str: nombre del jugador con mayor puntaje en la ronda.
-        Devuelve None si no se encuentra un mvp
-    """
-    # Inicializo las variables
-    max_points = 0
-    mvp = None
-    
-    for player in round_data:
-        points = calculate_points(round_data[player])
-        if points > max_points:
+        
+        
+        points = calculate_points(stats_current)
+        stats[player]['points'] += points
+        
+        # Comparación de puntaje para determinar mvp de la ronda
+        if max_points is None or points > max_points:
             max_points = points
             mvp = player
+            
+    if mvp:
+        stats[mvp]['MVP'] += 1
+
     return mvp
-    
+        
+
+"""
+=============================================================
+FUNCIÓN DE ORDENAMIENTO
+=============================================================
+"""  
 
 def sort_by_points(stats):
     """
