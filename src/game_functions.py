@@ -110,7 +110,8 @@ def find_mvp(round_data):
 
 def sort_by_points(stats):
     """
-    Ordena las estadísticas en orden decrecientes según los puntos totales.
+    Ordena las estadísticas en orden decrecientes por puntos totales en primer lugar y kills en segundo lugar 
+    usando sort()
     
     Args:
         stats (dict): diccionario con estadísticas acumuladas de todos los jugadores. 
@@ -125,27 +126,16 @@ def sort_by_points(stats):
 
     """
 
-    # Inicializo la lista
-    sorted_stats = []
-    for player, data in stats.items():
-        sorted_stats.append((player,data))
+    # Creo la lista
+    sorted_stats = [(player, data) for player, data in stats.items()]
     
-    # range(len(sorted_stats) - i - 1): Ajusta el número de comparaciones necesarias a medida que el algoritmo avanza
-    for i in range(len(sorted_stats)):
-        for j in range(len(sorted_stats) -i -1):
-            if sorted_stats[j][1]['points'] < sorted_stats[j + 1][1]['points']:
-                temp = sorted_stats[j]
-                sorted_stats[j] = sorted_stats[j + 1]
-                sorted_stats[j + 1] = temp
-                # Si los puntos son iguales, desempatar por kills en orden descendente
-            elif sorted_stats[j][1]['points'] == sorted_stats[j + 1][1]['points']:
-                if sorted_stats[j][1]['kills'] < sorted_stats[j + 1][1]['kills']:
-                    # Intercambiar las posiciones
-                    temp = sorted_stats[j]
-                    sorted_stats[j] = sorted_stats[j + 1]
-                    sorted_stats[j + 1] = temp
+    # Uso el método sort() para ordenar la lista
+    # La lista se ordena por points como primer criterio y kills como segundo criterio
+    # reverse = True ordena de mayor a menor.
+    sorted_stats.sort(key=lambda x: (x[1]['points'],x[1]['kills']), reverse=True)
+    
     return sorted_stats
-
+    
 
 """
 =============================================================
