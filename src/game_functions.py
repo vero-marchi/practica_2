@@ -153,7 +153,7 @@ FUNCIÓN DE VISUALIZACIÓN
 =============================================================
 """
 
-def print_ranking(round_number, stats):
+def print_ranking(round_number, stats, mvp=None):
     """
     Imprime el ranking de los jugadores según las estadísticas acumuladas.
 
@@ -162,6 +162,7 @@ def print_ranking(round_number, stats):
         stats (dict): diccionario con estadísticas acumuladas de todos los jugadores.
                       Las claves son los nombres de jugadores (str), y los valores incluyen:
                       'kills', 'assists', 'deaths', 'MVP', 'points' (todos int).
+        mvp(str): mvp de la ronda.
 
     Returns:
         None: no retorna ningún valor. Imprime el ranking en formato de tabla.
@@ -177,3 +178,7 @@ def print_ranking(round_number, stats):
         print(f"{player:8} {data['kills']:8} {data['assists']:8} {data['deaths']:8} "
                   f"{data['MVP']:8} {data['points']:8}")
     print("-"*54)
+    
+    #Impresión del mvp de la ronda
+    if mvp:
+        print(f"MVP de la ronda: {mvp}")
